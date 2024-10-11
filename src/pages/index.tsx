@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import localFont from 'next/font/local';
 import { useQuery } from '@tanstack/react-query';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
 const geistSans = localFont({
@@ -16,6 +16,7 @@ const geistMono = localFont({
 });
 
 export default function Home() {
+  const [categories, setCategories] = useState([]);
   const fetchCategories = async () => {
     try {
       const response = await fetch('/api/categories');
@@ -33,21 +34,25 @@ export default function Home() {
     queryKey: ['categoriesData'],
     queryFn: fetchCategories,
   });
-  console.log({ categoriesData });
 
   useEffect(() => {
-    console.log({ categoriesData });
+    if (categoriesData) {
+      setCategories(categoriesData);
+    }
   }, [categoriesData]);
 
+  console.log({ categories });
   return (
     <div
       className={`${geistSans.variable} ${geistMono.variable} grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]`}
     >
       <h1>Categories</h1>
       <ul>
-        {categoriesData.map((category: any) => (
+        {categories.map((category: any) => (
           <li key={category.id}>
-            <Link href={`/works/${category.id}`}>{category.name} </Link>
+            <Link href={`/categories/${category.id}/works`}>
+              {category.name}
+            </Link>
           </li>
         ))}
       </ul>
