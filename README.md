@@ -1,5 +1,7 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+Build a Collectibles Catalog web application using Next.js (with TypeScript) and Tailwind CSS. The app should allow users to view, add, edit, and delete collectibles from various categories. Use React Query for data fetching and caching, Prisma ORM with SQLite for database interactions
+
 ## Getting Started
 
 First, run the development server:
